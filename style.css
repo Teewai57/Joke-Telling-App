@@ -1,0 +1,10 @@
+body{
+    background-color: #433e49;
+}
+.btn{
+    background-color: #f3e8eb !important;
+}
+.container{
+    margin-top: 500px !important;
+    /* margin-bottom: auto !important; */
+}

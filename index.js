@@ -18,25 +18,38 @@
 
 const app = Vue.createApp({
     data() {
-        return{
+        return {
             jokes: ""
         }
     },
     methods: {
-        async getJokes(){
-            const res = await axios.get('https://icanhazdadjoke.com',{
-                headers:{
-                    Accept:'application/json',
+        async getJokes() {
+
+            const res = await axios.get('https://icanhazdadjoke.com', {
+                headers: {
+                    Accept: 'application/json',
                 }
             });
             const data = res.data.joke
             console.log(data);
             this.jokes = data
+            const u = new SpeechSynthesisUtterance();
+            u.text = data;
+            u.lang = 'en-US';
+            u.rate = 1.2;
+            speechSynthesis.speak(u);
 
+        },
+        toggle() {
+            this.getJokes()
         }
     },
-    mounted(){
+
+    mounted() {
 
     }
 })
 app.mount("#jokeApp");
+
+
+

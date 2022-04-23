@@ -10,7 +10,7 @@
 //     .then(item => {
 //         jokeContainer.textContent = `${item.joke}`;
 //         // jokeContainer.classList.add("fade");
-//     });
+//     }); j
 // }
 
 // btn.addEventListener("click", getJoke);
@@ -39,6 +39,7 @@ const app = Vue.createApp({
             u.rate = 1.2;
             speechSynthesis.speak(u);
 
+           
         },
         toggle() {
             this.getJokes()
@@ -46,6 +47,22 @@ const app = Vue.createApp({
     },
 
     mounted() {
+        window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        const recognition = new SpeechRecognition();
+        recognition.interimResults = true
+
+        recognition.addEventlistener('result', (e) => {
+            const transcript = Array.from(e.results)
+            .map(result => result[0])
+            .map(result => result.transcript)
+            .join('');
+
+            if (transcript == "tell me a joke") {
+                this.getJokes
+            }
+        })
+        recognition.addEventlistener('end', recognition.start)
+        recognition.start();
 
     }
 })
